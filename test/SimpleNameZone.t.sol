@@ -13,21 +13,17 @@ contract SimpleNameZoneTest is Test {
     }
 
     function testStow(bytes32 name, bytes32 meta, bytes32 data) public {
-        vm.startPrank(zone.auth());
         zone.stow(name, meta, data);
         bytes32 slot = keccak256(abi.encode(address(zone), name));
         (bool ok, bytes memory get) = address(dmap).call(abi.encodeWithSignature("get(bytes32)", slot));
         (bytes32 meta_, bytes32 data_) = abi.decode(get, (bytes32, bytes32));
         assertEq(meta, meta_);
         assertEq(data, data_);
-        vm.stopPrank();
     }
 
     function testGive(address heir) public {
-        vm.startPrank(zone.auth());
         zone.give(heir);
         assertEq(zone.auth(), heir);
-        vm.stopPrank();
     }
 
     function testStowErrAuth(address owner, address not_owner) public {
