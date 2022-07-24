@@ -4,7 +4,7 @@ pragma solidity ^0.8.13;
 import "forge-std/Test.sol";
 import { SimpleNameZone, DmapLike } from "src/SimpleNameZone.sol";
 
-contract ContractTest is Test {
+contract SimpleNameZoneTest is Test {
     SimpleNameZone zone;
     DmapLike dmap = DmapLike(address(uint160(0x90949c9937A11BA943C7A72C3FA073a37E3FdD96))); 
 

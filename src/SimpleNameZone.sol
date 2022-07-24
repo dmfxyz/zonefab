@@ -16,7 +16,7 @@ contract SimpleNameZone {
 
     constructor(DmapLike _dmap_) {
         dmap = _dmap_;
-        auth = tx.origin;
+        auth = msg.sender;
     }
 
     function stow(bytes32 name, bytes32 meta, bytes32 data) external {
@@ -41,11 +41,12 @@ contract SimpleNameZoneFactory {
         dmap = _dmap_;
     }
 
-    function make() payable external returns (SimpleNameZone stub)
+    function make() payable external returns (SimpleNameZone)
     {
         SimpleNameZone zone = new SimpleNameZone(dmap);
         made[address(zone)] = true;
+        zone.give(msg.sender);
         emit Make(msg.sender, address(zone));
-        return stub;
+        return zone;
     }
 }
