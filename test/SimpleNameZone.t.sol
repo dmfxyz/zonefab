@@ -22,4 +22,19 @@ contract SimpleNameZoneTest is Test {
         assertEq(data, data_);
         vm.stopPrank();
     }
+
+    function testGive(address heir) public {
+        vm.startPrank(zone.auth());
+        zone.give(heir);
+        assertEq(zone.auth(), heir);
+        vm.stopPrank();
+    }
+
+    function testStowErrAuth(address owner, address not_owner) public {
+        // stub
+    }
+
+    function testGiveErrAuth(address owner, address not_owner) public {
+        // stub
+    }
 }
