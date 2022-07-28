@@ -2,11 +2,11 @@
 pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
-import { SimpleNameZone, DmapLike } from "src/SimpleNameZone.sol";
+import { SimpleNameZone, Dmap } from "src/SimpleNameZone.sol";
 
 contract SimpleNameZoneTest is Test {
     SimpleNameZone zone;
-    DmapLike dmap = DmapLike(address(uint160(0x90949c9937A11BA943C7A72C3FA073a37E3FdD96))); 
+    Dmap dmap = Dmap(address(uint160(0x90949c9937A11BA943C7A72C3FA073a37E3FdD96))); 
 
     function setUp() public {
         zone = new SimpleNameZone(dmap);
@@ -26,11 +26,17 @@ contract SimpleNameZoneTest is Test {
         assertEq(zone.auth(), heir);
     }
 
-    function testStowErrAuth(address owner, address not_owner) public {
-        // stub
+    function testStowErrAuth(address not_owner) public {
+        vm.assume(address(this) != not_owner);
+        vm.expectRevert(SimpleNameZone.ErrAuth.selector);
+        vm.prank(not_owner);
+        zone.stow(0x0, 0x0, 0x0);
     }
 
-    function testGiveErrAuth(address owner, address not_owner) public {
-        // stub
+    function testGiveErrAuth(address not_owner, address heir) public {
+        vm.assume(address(this) != not_owner);
+        vm.expectRevert(SimpleNameZone.ErrAuth.selector);
+        vm.prank(not_owner);
+        zone.give(heir);
     }
 }

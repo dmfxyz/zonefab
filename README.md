@@ -1,11 +1,11 @@
 # zonefab
 A `SimpleNameZone` and `SimpleNameZoneFactory` for creating zones to be used within [dmap](https://github.com/dapphub/dmap).
 
-For more detail, see https://github.com/ricobank/how-to/blob/master/make-a-namezone.md.
+For more detail, see https://ricobank.github.io/how-to/make-a-namezone.
 
 Repo is just a sketch and will likely be improved.
 
-`SimpleNameZoneFactory` is currently deployed on mainnet at `:free.zonefab`, or `0xa964133b1d5b3ff1c4473ad19be37b6e2aade62`
+`SimpleNameZoneFactory` is currently deployed on mainnet at `:free.zonefab`, or `0xa964133B1d5b3FF1c4473Ad19bE37b6E2AaDE62b`
 
 
 ### Test
